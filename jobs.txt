@@ -1,0 +1,24 @@
+Scheduling Algorithms
+-FCFS
+-RR
+-PS
+Performance Metrics
+-CPU utilization
+-Throughput
+-Turnaround time
+-Waiting time
+-Response time
+Visualize
+-CPU
+-Ready queue
+-I/O device
+-I/O queue
+Simulation
+-Mode, 0 for auto 1 for manual
+-Unit time
+-Quantum, only used for round-robin-related
+Input File
+PCB
+Scheduler
+Scheduling Simulation and Output
+Extra Credits
