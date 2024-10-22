@@ -70,7 +70,9 @@ public abstract class SchedulingAlgorithm {
 
     //print simulation step
     public void print() {
-        System.out.printf("CPU: %s\n", curProcess == null ? "idle" : curProcess.getName());
+        System.out.println("----------");
+        System.out.printf("|CPU: %s |\n", curProcess == null ? "idle" : curProcess.getName());
+        System.out.println("----------");
         for (PCB proc : readyQueue) {
             System.out.println(proc);
         }
