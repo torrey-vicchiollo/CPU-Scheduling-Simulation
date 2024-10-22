@@ -10,6 +10,7 @@ public class RR extends SchedulingAlgorithm {
         super("RR", queue);
     }
 
+    @Override
     public PCB pickNextProcess() {
         Collections.sort(readyQueue, (pcb1, pcb2) -> (pcb1.getPriority() - pcb2.getPriority()));
         return readyQueue.get(0);

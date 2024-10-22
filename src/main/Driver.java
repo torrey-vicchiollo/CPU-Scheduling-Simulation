@@ -35,12 +35,25 @@ public class Driver {
                 String name = params[0];
                 //arrival time
                 int arrivalTime = Integer.parseInt(params[1]);
-                //burst time
-                int cpuBurstTime = Integer.parseInt(params[2]);
                 //priority
-                int priority = Integer.parseInt(params[3]);
+                int priority = Integer.parseInt(params[2]);
+
+
+
+                //cpu and io bursts
+                Integer[] cpuBursts = new Integer[params.length-3];
+                Integer[] ioBursts = new Integer[cpuBursts.length-1];
+                int j = 0;
+                for (int i = 3; i < params.length; i+=2){
+                    cpuBursts[j] = Integer.parseInt(params[i]);
+                    if (i+1 < params.length){
+                        ioBursts[j] = Integer.parseInt(params[i+1]);
+                    }
+                    j++;
+                }
+
                 //add new PCB to the all processes arraylist
-                allProcesses.add(new PCB(name, id, arrivalTime, cpuBurstTime, priority));
+                allProcesses.add(new PCB(name, id, arrivalTime, priority, cpuBursts, ioBursts));
                 //increment id
                 id++;
             }
