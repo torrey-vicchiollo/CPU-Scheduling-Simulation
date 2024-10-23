@@ -2,6 +2,7 @@ package scheduling;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 import main.CPU;
 import main.IODevice;
 import main.PCB;
@@ -24,6 +25,10 @@ public abstract class SchedulingAlgorithm {
     protected PCB curIOProcess;
     //system time/simulation steps
     protected int systemTime;
+    //quantum time of the algorithm if applicable
+    protected int quantumTime;
+
+
 
     public SchedulingAlgorithm(String name, List<PCB> queue) {
         this.name = name;
@@ -32,6 +37,7 @@ public abstract class SchedulingAlgorithm {
         this.waitingQueue = new ArrayList<>();
         this.finishedProcs = new ArrayList<>();
         this.systemTime = 0;
+        this.quantumTime = 0;
     }
 
     public void schedule() {
@@ -158,6 +164,7 @@ public abstract class SchedulingAlgorithm {
 
     //Selects the next task using the appropriate scheduling algorithm
     public abstract PCB pickNextProcess(List<PCB> queue);
+
 
     //print simulation step
     public void print() {

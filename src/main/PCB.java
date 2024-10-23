@@ -21,10 +21,10 @@ public class PCB {
     //current burst
     private int currentBurst;
     //the stats of the process execution
-    private int startTime, finishTime, turnaroundTime, waitingTime;
+    private int startTime, finishTime, turnaroundTime, waitingTime,quantumTimeTrack;
 
     //constructor
-    public PCB(String name, int id, int arrivalTime, int priority, List<Integer> cpuBursts, List<Integer> ioBursts) {
+    public PCB(String name, int id, int arrivalTime, int priority, List<Integer> cpuBursts, List<Integer> ioBursts,int quantumTimeTrack) {
         super();
         this.name = name;
         this.id = id;
@@ -37,6 +37,7 @@ public class PCB {
         this.startTime = -1;
         this.finishTime = -1;
         this.currentBurst = cpuBursts.get(0);
+        this.quantumTimeTrack = quantumTimeTrack;
     }
 
     //getters & setters
@@ -141,10 +142,19 @@ public class PCB {
         // Increase the waitingTime variable with burst.
         this.waitingTime += burst;
     }
+ public int getQuantumTimeTrack() {
+        return quantumTimeTrack;
+    }
+
+    public void setQuantumTimeTrack(int quantumTimeTrack) {
+        this.quantumTimeTrack = quantumTimeTrack;
+    }
+
+
 
     @Override
     public String toString() {
         return "P" + id + " {Name=" + name + ", Arrival Time=" + arrivalTime + ", Current Burst=" + currentBurst + ", Priority=" + priority + "}";
     }
-
+   
 }

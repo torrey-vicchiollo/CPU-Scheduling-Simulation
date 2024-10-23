@@ -23,6 +23,8 @@ public class Driver {
             scan = new Scanner(new File("src/proc.txt"));
             //find the input algorithm from the first line
             String alg = scan.nextLine();
+            //find the quantum time from the second line
+            int quantumTime = Integer.parseInt(scan.nextLine());
             //create a PCB array list for storing all processes
             ArrayList<PCB> allProcesses = new ArrayList<>();
             //create int id
@@ -51,7 +53,7 @@ public class Driver {
                 }
 
                 //add new PCB to the all processes arraylist
-                allProcesses.add(new PCB(name, id, arrivalTime, priority, cpuBursts, ioBursts));
+                allProcesses.add(new PCB(name, id, arrivalTime, priority, cpuBursts, ioBursts,quantumTime));
                 //increment id
                 id++;
             }
