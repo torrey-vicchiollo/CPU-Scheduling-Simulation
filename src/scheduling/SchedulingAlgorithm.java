@@ -2,7 +2,6 @@ package scheduling;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 import main.CPU;
 import main.IODevice;
 import main.PCB;
