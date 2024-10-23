@@ -1,5 +1,7 @@
 package main;
 
+import java.util.List;
+
 public class PCB {
 
     //process name
@@ -11,20 +13,18 @@ public class PCB {
     //process priority
     private int priority;
     //cpu burst array & index
-    private Integer[] cpuBursts;
+    private List<Integer> cpuBursts;
     private int cpuBurstIndex;
     //io burst array & index
-    private Integer[] ioBursts;
+    private List<Integer> ioBursts;
     private int ioBurstIndex;
-    //burst mode (either "CPU" or "IO")
-    private String burstMode;
     //current burst
     private int currentBurst;
     //the stats of the process execution
     private int startTime, finishTime, turnaroundTime, waitingTime;
 
     //constructor
-    public PCB(String name, int id, int arrivalTime, int priority, Integer[] cpuBursts, Integer[] ioBursts) {
+    public PCB(String name, int id, int arrivalTime, int priority, List<Integer> cpuBursts, List<Integer> ioBursts) {
         super();
         this.name = name;
         this.id = id;
@@ -34,21 +34,12 @@ public class PCB {
         this.cpuBurstIndex = 0;
         this.ioBursts = ioBursts;
         this.ioBurstIndex = 0;
-        this.burstMode = "CPU";
         this.startTime = -1;
         this.finishTime = -1;
-        this.currentBurst = cpuBursts[0];
+        this.currentBurst = cpuBursts.get(0);
     }
 
     //getters & setters
-    public String getBurstMode() {
-        return burstMode;
-    }
-
-    public void setBurstMode(String burstMode) {
-        this.burstMode = burstMode;
-    }
-
     public int getCPUBurstIndex() {
         return cpuBurstIndex;
     }
@@ -97,19 +88,19 @@ public class PCB {
         this.arrivalTime = arrivalTime;
     }
 
-    public Integer[] getCPUBursts() {
+    public List<Integer> getCPUBursts() {
         return cpuBursts;
     }
 
-    public void setCPUBursts(Integer[] cpuBursts) {
+    public void setCPUBursts(List<Integer> cpuBursts) {
         this.cpuBursts = cpuBursts;
     }
 
-    public Integer[] getIOBursts() {
+    public List<Integer> getIOBursts() {
         return ioBursts;
     }
 
-    public void setIOBursts(Integer[] ioBursts) {
+    public void setIOBursts(List<Integer> ioBursts) {
         this.ioBursts = ioBursts;
     }
 
@@ -153,8 +144,7 @@ public class PCB {
 
     @Override
     public String toString() {
-        return "PCB [name=" + name + ", id=" + id + ", arrivalTime=" + arrivalTime + ", currentBurst=" + currentBurst
-                + ", priority=" + priority + "]";
+        return "P" + id + " {Name=" + name + ", Arrival Time=" + arrivalTime + ", Current Burst=" + currentBurst + ", Priority=" + priority + "}";
     }
 
 }

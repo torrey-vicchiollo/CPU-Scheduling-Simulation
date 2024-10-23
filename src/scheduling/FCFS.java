@@ -10,7 +10,7 @@ public class FCFS extends SchedulingAlgorithm {
     }
 
     @Override
-    public PCB pickNextProcess() {
-        return readyQueue.get(0); //choose first process in ready queue
+    public PCB pickNextProcess(List<PCB> queue) {
+        return queue.get(0); //choose first process in ready queue
     }
 }

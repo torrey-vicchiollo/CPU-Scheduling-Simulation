@@ -11,9 +11,9 @@ public class SJF extends SchedulingAlgorithm {
     }
 
     @Override
-    public PCB pickNextProcess() {
+    public PCB pickNextProcess(List<PCB> queue) {
         // Collections.sort(readyQueue, Comparator.comparingInt(PCB::getCpuBurst));
-        Collections.sort(readyQueue, (pcb1, pcb2) -> (pcb1.getCurrentBurst() - pcb2.getCurrentBurst()));
-        return readyQueue.get(0);
+        Collections.sort(queue, (pcb1, pcb2) -> (pcb1.getCurrentBurst() - pcb2.getCurrentBurst()));
+        return queue.get(0);
     }
 }

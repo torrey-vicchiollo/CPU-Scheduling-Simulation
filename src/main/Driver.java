@@ -3,6 +3,7 @@ package main;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 import scheduling.FCFS;
 import scheduling.PS;
@@ -12,6 +13,7 @@ import scheduling.SchedulingAlgorithm;
 
 public class Driver {
 
+    @SuppressWarnings("UnnecessaryTemporaryOnConversionFromString")
     public static void main(String[] args) {
         //create scanner object
         Scanner scan;
@@ -38,18 +40,14 @@ public class Driver {
                 //priority
                 int priority = Integer.parseInt(params[2]);
 
-
-
                 //cpu and io bursts
-                Integer[] cpuBursts = new Integer[params.length-3];
-                Integer[] ioBursts = new Integer[cpuBursts.length-1];
-                int j = 0;
-                for (int i = 3; i < params.length; i+=2){
-                    cpuBursts[j] = Integer.parseInt(params[i]);
-                    if (i+1 < params.length){
-                        ioBursts[j] = Integer.parseInt(params[i+1]);
+                List<Integer> cpuBursts = new ArrayList<>();
+                List<Integer> ioBursts = new ArrayList<>();
+                for (int i = 3; i < params.length; i += 2) {
+                    cpuBursts.add(Integer.parseInt(params[i]));
+                    if (i + 1 < params.length) {
+                        ioBursts.add(Integer.parseInt(params[i + 1]));
                     }
-                    j++;
                 }
 
                 //add new PCB to the all processes arraylist
