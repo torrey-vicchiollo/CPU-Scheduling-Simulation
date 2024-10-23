@@ -53,7 +53,7 @@ public class Driver {
                 }
 
                 //add new PCB to the all processes arraylist
-                allProcesses.add(new PCB(name, id, arrivalTime, priority, cpuBursts, ioBursts,quantumTime));
+                allProcesses.add(new PCB(name, id, arrivalTime, priority, cpuBursts, ioBursts,quantumTime, quantumTime));
                 //increment id
                 id++;
             }
