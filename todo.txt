@@ -1,0 +1,14 @@
+Performance Metrics
+-CPU utilization
+-Throughput
+-Turnaround time
+-Waiting time
+-Response time
+
+Simulation
+-manual mode
+-display Quantum properly
+
+-waiting queue is backwards
+
+Extra Credits?

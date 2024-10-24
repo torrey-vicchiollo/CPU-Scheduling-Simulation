@@ -6,8 +6,8 @@ import main.PCB;
 
 public class SJF extends SchedulingAlgorithm {
 
-    public SJF(List<PCB> queue) {
-        super("SJF", queue);
+    public SJF(List<PCB> queue, int simulationMode, int simulationUnit) {
+        super("SJF", queue, simulationMode, simulationUnit);
     }
 
     @Override

@@ -26,15 +26,19 @@ public abstract class SchedulingAlgorithm {
     protected int systemTime;
     //quantum time of the algorithm if applicable
     protected int quantumTime;
+    //simulation mode
+    protected int simulationMode;
+    //simulation unit
+    protected int simulationUnit;
 
-
-
-    public SchedulingAlgorithm(String name, List<PCB> queue) {
+    public SchedulingAlgorithm(String name, List<PCB> queue, int simulationMode, int simulationUnit) {
         this.name = name;
         this.allProcs = queue;
         this.readyQueue = new ArrayList<>();
         this.waitingQueue = new ArrayList<>();
         this.finishedProcs = new ArrayList<>();
+        this.simulationMode = simulationMode;
+        this.simulationUnit = simulationUnit;
         this.systemTime = 0;
         this.quantumTime = 0;
     }
@@ -45,17 +49,23 @@ public abstract class SchedulingAlgorithm {
             //clear terminal
             System.out.print("\033\143");
             //print scheduling algorithm name
-            System.out.println("Scheduling Algorithm: " + name);
+            System.out.println("SCHEDULING ALGORITHM >> " + name);
+            //print simulation mode
+            System.out.println("SIMULATION MODE      >> " + simulationMode);
+            //print simulation time
+            System.out.println("SIMULATION UNIT (MS) >> " + simulationUnit);
+            //print quantum
+            System.out.println("QUANTUM (TIME SLICE) >> " + quantumTime);
+            System.out.println();
             //print system time
-            System.out.print("System Time: " + systemTime + "       ");
+            System.out.println("SYSTEM TIME: " + systemTime);
             //move arrived processes from allProcs to readyQueue (arrivalTime = systemTime)
             for (PCB proc : allProcs) {
                 if (proc.getArrivalTime() <= systemTime) {
                     readyQueue.add(proc);
-                    System.out.printf("%s has arrived!", proc.getName());
+                    System.out.printf("%s has arrived!\n", proc.getName());
                 }
             }
-            System.out.println();
             //clear allProcs of any processes in the Ready Queue
             allProcs.removeAll(readyQueue);
 
@@ -142,21 +152,25 @@ public abstract class SchedulingAlgorithm {
             }
 
             //printing
-            String curCPUProcessString = curCPUProcess != null ? ("Current CPU Process: " + curCPUProcess.toString()) : "Current CPU Process: IDLE";
+            String curCPUProcessString = curCPUProcess != null ? ("CURRENT CPU PROCESS >> " + curCPUProcess.toString()) : "CURRENT CPU PROCESS >> IDLE";
             System.out.println(curCPUProcessString);
-            String curIOProcessString = curIOProcess != null ? ("Current IO Process: " + curIOProcess.toString()) : "Current IO Process: IDLE";
+            String curIOProcessString = curIOProcess != null ? ("CURRENT IO PROCESS  >> " + curIOProcess.toString()) : "CURRENT IO PROCESS  >> IDLE";
             System.out.println(curIOProcessString);
 
             //print finished processes
-            System.out.println("Finished Processes");
+            System.out.println("\n---FINISHED-PROCESSES---");
             for (PCB proc : finishedProcs) {
                 System.out.println(proc.toString());
             }
 
             System.out.println("\n\n\n");
-            try {
-                Thread.sleep(1000);
-            } catch (InterruptedException e) {
+
+            //if auto mode
+            if (simulationMode == 0) {
+                try {
+                    Thread.sleep(simulationUnit);
+                } catch (InterruptedException e) {
+                }
             }
         }
     }
@@ -164,11 +178,10 @@ public abstract class SchedulingAlgorithm {
     //Selects the next task using the appropriate scheduling algorithm
     public abstract PCB pickNextProcess(List<PCB> queue);
 
-
     //print simulation step
     public void print() {
-        System.out.println("-CPU--  -Ready-Queue-----------------");
-        System.out.printf("| %s |  < ", curCPUProcess == null ? "ID" : "P" + curCPUProcess.getId());
+        System.out.println("-CPU--  -READY-QUEUE-----------------");
+        System.out.printf("| %s |<<  ", curCPUProcess == null ? "ID" : "P" + curCPUProcess.getId());
         for (PCB proc : readyQueue) {
             if (proc != curCPUProcess) {
                 System.out.print("(P" + proc.getId() + ") ");
@@ -176,8 +189,8 @@ public abstract class SchedulingAlgorithm {
         }
         System.out.println();
         System.out.println("------  -----------------------------");
-        System.out.println("  VV                             ^^  ");
-        System.out.println("-Waiting-Queue---------------  -IO---");
+        System.out.println("  \\/                             /\\  ");
+        System.out.println("-WAITING-QUEUE---------------  -IO---");
         int x = 0;
         for (PCB proc : waitingQueue) {
             if (proc != curIOProcess) {
@@ -188,7 +201,7 @@ public abstract class SchedulingAlgorithm {
         for (int i = x; i < 28; i++) {
             System.out.print(" ");
         }
-        System.out.printf(">  | %s |\n", curIOProcess == null ? "ID" : "P" + curIOProcess.getId());
+        System.out.printf(" >>| %s |\n", curIOProcess == null ? "ID" : "P" + curIOProcess.getId());
         System.out.println("-----------------------------  ------");
     }
 }
