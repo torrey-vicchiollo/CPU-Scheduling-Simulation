@@ -19,12 +19,25 @@ public class Driver {
         Scanner scan;
         //try/catch to catch missing file
         try {
+            //get inputs
+            Scanner inputScanner = new Scanner(System.in);
+            int simulationMode = -1;
+            while (!(simulationMode == 0 || simulationMode == 1)) {
+                System.out.println("Please select simulation mode (0=auto, 1=manual): ");
+                simulationMode = inputScanner.nextInt();
+            }
+            System.out.println("Please enter simulation unit time (ms) (1000 recommended): ");
+            int simulationUnit = inputScanner.nextInt();
+            int quantumTime = -1;
+            while (quantumTime <= 0) {
+                System.out.println("Please enter Quantum (time slice): ");
+                quantumTime = inputScanner.nextInt();
+            }
+            inputScanner.close();
             //get input file
             scan = new Scanner(new File("src/proc.txt"));
             //find the input algorithm from the first line
             String alg = scan.nextLine();
-            //find the quantum time from the second line
-            int quantumTime = Integer.parseInt(scan.nextLine());
             //create a PCB array list for storing all processes
             ArrayList<PCB> allProcesses = new ArrayList<>();
             //create int id
@@ -53,7 +66,7 @@ public class Driver {
                 }
 
                 //add new PCB to the all processes arraylist
-                allProcesses.add(new PCB(name, id, arrivalTime, priority, cpuBursts, ioBursts,quantumTime, quantumTime));
+                allProcesses.add(new PCB(name, id, arrivalTime, priority, cpuBursts, ioBursts, quantumTime, quantumTime));
                 //increment id
                 id++;
             }
@@ -64,16 +77,16 @@ public class Driver {
             //pick scheduling algorithm from input file
             switch (alg) {
                 case "FCFS":
-                    scheduler = new FCFS(allProcesses);
+                    scheduler = new FCFS(allProcesses, simulationMode, simulationUnit);
                     break;
                 case "SJF":
-                    scheduler = new SJF(allProcesses);
+                    scheduler = new SJF(allProcesses, simulationMode, simulationUnit);
                     break;
                 case "PS":
-                    scheduler = new PS(allProcesses);
+                    scheduler = new PS(allProcesses, simulationMode, simulationUnit);
                     break;
                 case "RR":
-                    scheduler = new RR(allProcesses);
+                    scheduler = new RR(allProcesses, simulationMode, simulationUnit);
                     break;
                 default:
                     System.err.println("Unsupported algorithm!");

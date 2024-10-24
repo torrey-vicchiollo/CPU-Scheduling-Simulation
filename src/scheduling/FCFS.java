@@ -5,8 +5,8 @@ import main.PCB;
 
 public class FCFS extends SchedulingAlgorithm {
 
-    public FCFS(List<PCB> queue) {
-        super("FCFS", queue);
+    public FCFS(List<PCB> queue, int simulationMode, int simulationUnit) {
+        super("FCFS", queue, simulationMode, simulationUnit);
     }
 
     @Override
