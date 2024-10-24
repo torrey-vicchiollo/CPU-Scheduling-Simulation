@@ -1,6 +1,6 @@
 Scheduling Algorithms
 -FCFS X
--RR
+-RR X
 -PS X
 Performance Metrics
 -CPU utilization
