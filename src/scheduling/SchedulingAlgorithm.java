@@ -51,7 +51,7 @@ public abstract class SchedulingAlgorithm {
             //print scheduling algorithm name
             System.out.println("SCHEDULING ALGORITHM >> " + name);
             //print simulation mode
-            System.out.println("SIMULATION MODE      >> " + simulationMode);
+            System.out.println("SIMULATION MODE      >> " + (simulationMode == 0 ? "AUTO" : "MANUAL"));
             //print simulation time
             System.out.println("SIMULATION UNIT (MS) >> " + simulationUnit);
             //print quantum

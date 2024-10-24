@@ -23,14 +23,14 @@ public class Driver {
             Scanner inputScanner = new Scanner(System.in);
             int simulationMode = -1;
             while (!(simulationMode == 0 || simulationMode == 1)) {
-                System.out.println("Please select simulation mode (0=auto, 1=manual): ");
+                System.out.println("Please select simulation mode [0 >> AUTO, 1 >> MANUAL] >> ");
                 simulationMode = inputScanner.nextInt();
             }
-            System.out.println("Please enter simulation unit time (ms) (1000 recommended): ");
+            System.out.println("Please enter simulation unit time (ms) [1000 RECOMMENDED] >> ");
             int simulationUnit = inputScanner.nextInt();
             int quantumTime = -1;
             while (quantumTime <= 0) {
-                System.out.println("Please enter Quantum (time slice): ");
+                System.out.println("Please enter Quantum (time slice) >> ");
                 quantumTime = inputScanner.nextInt();
             }
             inputScanner.close();
