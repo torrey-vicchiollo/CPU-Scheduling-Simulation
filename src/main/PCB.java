@@ -160,7 +160,7 @@ public class PCB {
 
     @Override
     public String toString() {
-        return "P" + id + " {Name=" + name + ", Arrival Time=" + arrivalTime + ", Current Burst=" + currentBurst + ", Priority=" + priority + "}";
+        return "P" + id + " {Name=" + name + ", Arrival Time=" + arrivalTime + ", Current Burst=" + currentBurst + ", Priority=" + priority + ", Turnaround Time=" + turnaroundTime + ", Waiting Time=" + waitingTime + "}";
     }
 
 }

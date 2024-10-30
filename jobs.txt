@@ -3,11 +3,11 @@ Scheduling Algorithms
 -RR X
 -PS X
 Performance Metrics
--CPU utilization
--Throughput
--Turnaround time
--Waiting time
--Response time
+-CPU utilization X
+-Throughput X
+-Turnaround time X
+-Waiting time X
+-Response time 
 Visualize
 -CPU
 -Ready queue

@@ -30,6 +30,8 @@ public abstract class SchedulingAlgorithm {
     protected int simulationUnit;
     //idle time
     protected int idleTime;
+    //throughput
+    protected double throughput;
 
     public SchedulingAlgorithm(String name, List<PCB> queue, int simulationMode, int simulationUnit) {
         this.name = name;
@@ -128,6 +130,7 @@ public abstract class SchedulingAlgorithm {
                         waitingQueue.add(curCPUProcess);
                         System.out.printf("%s has been moved to the Waiting Queue!\n", curCPUProcess.getName());
                     } else { //if the current CPU process doesn't have any IO bursts remaining
+                        curCPUProcess.setFinishTime(systemTime);
                         finishedProcs.add(curCPUProcess);
                         System.out.printf("%s has finished!\n", curCPUProcess.getName());
                     }
@@ -167,7 +170,12 @@ public abstract class SchedulingAlgorithm {
             System.out.println("idle time: " + idleTime);
 
             //getting the cpu utilization and setting it to two decimal places
-            System.out.printf("CPU utilization: %.2f%%\n", ((systemTime - idleTime) / (double)systemTime) * 100);
+            System.out.printf("CPU utilization: %.2f%%\n", ((systemTime - idleTime) / (double) systemTime) * 100);
+            // Calculate throughput
+            double throughput = (double) finishedProcs.size() / systemTime;
+            // Print the throughput with two decimal places
+            System.out.printf("Throughput: %.2f tasks per unit time\n", throughput);
+            
 
             System.out.println("\n\n\n");
 
@@ -210,6 +218,6 @@ public abstract class SchedulingAlgorithm {
         }
         System.out.printf(" >>| %s |\n", curIOProcess == null ? "ID" : "P" + curIOProcess.getId());
         System.out.println("-----------------------------  ------");
-        
+
     }
 }
