@@ -8,6 +8,8 @@ Performance Metrics
 -Turnaround time X
 -Waiting time X
 -Response time 
+-AVG Turn time
+-AVG wait time
 Visualize
 -CPU
 -Ready queue
