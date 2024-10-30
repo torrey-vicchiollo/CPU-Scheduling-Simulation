@@ -92,7 +92,7 @@ public class Driver {
                     System.err.println("Unsupported algorithm!");
             }
             //schedule
-            scheduler.schedule();
+            scheduler.schedule(quantumTime);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }

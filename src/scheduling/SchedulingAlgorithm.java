@@ -24,8 +24,6 @@ public abstract class SchedulingAlgorithm {
     protected PCB curIOProcess;
     //system time/simulation steps
     protected int systemTime;
-    //quantum time of the algorithm if applicable
-    protected int quantumTime;
     //simulation mode
     protected int simulationMode;
     //simulation unit
@@ -40,10 +38,9 @@ public abstract class SchedulingAlgorithm {
         this.simulationMode = simulationMode;
         this.simulationUnit = simulationUnit;
         this.systemTime = 0;
-        this.quantumTime = 0;
     }
 
-    public void schedule() {
+    public void schedule(int quantumTime) {
         //while there are processes and the ready queue is not empty
         while (!allProcs.isEmpty() || !readyQueue.isEmpty() || !waitingQueue.isEmpty()) {
             //clear terminal
