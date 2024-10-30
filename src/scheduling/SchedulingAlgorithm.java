@@ -28,6 +28,8 @@ public abstract class SchedulingAlgorithm {
     protected int simulationMode;
     //simulation unit
     protected int simulationUnit;
+    //idle time
+    protected int idleTime;
 
     public SchedulingAlgorithm(String name, List<PCB> queue, int simulationMode, int simulationUnit) {
         this.name = name;
@@ -77,6 +79,8 @@ public abstract class SchedulingAlgorithm {
                 }
                 //execute cpu for 1 unit time
                 CPU.execute(curCPUProcess, 1);
+            } else {
+                idleTime++;
             }
 
             //io 
@@ -159,6 +163,11 @@ public abstract class SchedulingAlgorithm {
             for (PCB proc : finishedProcs) {
                 System.out.println(proc.toString());
             }
+            System.out.println("system time: " + systemTime);
+            System.out.println("idle time: " + idleTime);
+
+            //getting the cpu utilization and setting it to two decimal places
+            System.out.printf("CPU utilization: %.2f%%\n", ((systemTime - idleTime) / (double)systemTime) * 100);
 
             System.out.println("\n\n\n");
 
@@ -177,6 +186,7 @@ public abstract class SchedulingAlgorithm {
 
     //print simulation step
     public void print() {
+        System.out.println("idle time:  " + idleTime);
         System.out.println("-CPU--  -READY-QUEUE-----------------");
         System.out.printf("| %s |<<  ", curCPUProcess == null ? "ID" : "P" + curCPUProcess.getId());
         for (PCB proc : readyQueue) {
@@ -200,5 +210,6 @@ public abstract class SchedulingAlgorithm {
         }
         System.out.printf(" >>| %s |\n", curIOProcess == null ? "ID" : "P" + curIOProcess.getId());
         System.out.println("-----------------------------  ------");
+        
     }
 }
