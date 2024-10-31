@@ -172,13 +172,24 @@ public abstract class SchedulingAlgorithm {
             System.out.println("system time: " + systemTime);
             System.out.println("idle time: " + idleTime);
 
-            //getting the cpu utilization and setting it to two decimal places
-            System.out.printf("CPU utilization: %.2f%%\n", ((systemTime - idleTime) / (double) systemTime) * 100);
+            //getting the cpu utilization
+            System.out.println("CPU utilization " + getCPUUtilization(systemTime, idleTime) + "%");
+            int totalTAT = 0;
+            int totalWT = 0;
+            for(PCB pcb: finishedProcs){
+                totalTAT += pcb.getTurnAroundTime();
+                totalWT += pcb.getWaitingTime();
+            }
+            double avgTAT = (double) totalTAT / finishedProcs.size();
+            double avgWT = (double) totalWT / finishedProcs.size();
+
+            System.out.println("average turnaround time " + avgTAT);
+            System.out.println("Average wait time " + avgWT);
             // Calculate throughput
             double throughput = (double) finishedProcs.size() / systemTime;
             // Print the throughput with two decimal places
             System.out.printf("Throughput: %.2f tasks per unit time\n", throughput);
-            
+
 
             System.out.println("\n\n\n");
 
@@ -232,4 +243,11 @@ public abstract class SchedulingAlgorithm {
         System.out.println("-----------------------------  ------");
 
     }
+
+    public double getCPUUtilization(int systemTime, int idleTime) {
+        double utilization = ((systemTime - idleTime) / (double) systemTime) * 100;
+        return Math.round(utilization * 100.0) / 100.0;
+    }
+
+
 }
