@@ -46,8 +46,7 @@ public abstract class SchedulingAlgorithm {
         this.systemTime = 0;
     }
 
-    public void schedule(int quantumTime) {
-        Scanner scan = new Scanner(System.in);
+    public void schedule(int quantumTime, Scanner inputScanner) {
         //while there are processes and the ready queue is not empty
         while (!allProcs.isEmpty() || !readyQueue.isEmpty() || !waitingQueue.isEmpty()) {
             //clear terminal
@@ -202,14 +201,14 @@ public abstract class SchedulingAlgorithm {
             } else {
                 // if manual mode
                 System.out.print("Continue? Y/N");
-                String next = scan.nextLine();
+                String next = inputScanner.nextLine();
                 if (next.contains("n") || next.contains("N")) {
                     break;
                 }
             }
         }
         System.out.println("Finished!");
-        scan.close();
+        inputScanner.close();
     }
 
     //Selects the next task using the appropriate scheduling algorithm

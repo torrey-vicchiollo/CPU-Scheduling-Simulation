@@ -7,22 +7,22 @@ Performance Metrics
 -Throughput X
 -Turnaround time X
 -Waiting time X
--Response time 
+-Response time (First Response Time - Arrival Time)
 -AVG Turn time X
 -AVG wait time X
 Visualize
--CPU
--Ready queue
--I/O device
--I/O queue
+-CPU X
+-Ready queue X
+-I/O device X
+-I/O queue X
 Simulation
 -Mode, 0 for auto 1 for manual X
--Unit time
--Quantum, only used for round-robin-related
-Input File
-PCB
-Scheduler
-Scheduling Simulation and Output
+-Unit time X
+-Quantum, only used for round-robin-related X
+Input File X
+PCB X
+Scheduler X
+Scheduling Simulation and Output X
 
 shit we forogt about --------------
 - The users can select the scheduling algorithm to run (FCFS, RR, SJF, or PS). They
