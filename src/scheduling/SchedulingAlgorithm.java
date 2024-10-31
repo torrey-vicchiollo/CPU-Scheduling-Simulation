@@ -2,6 +2,8 @@ package scheduling;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
+
 import main.CPU;
 import main.IODevice;
 import main.PCB;
@@ -45,6 +47,7 @@ public abstract class SchedulingAlgorithm {
     }
 
     public void schedule(int quantumTime) {
+        Scanner scan = new Scanner(System.in);
         //while there are processes and the ready queue is not empty
         while (!allProcs.isEmpty() || !readyQueue.isEmpty() || !waitingQueue.isEmpty()) {
             //clear terminal
@@ -185,8 +188,17 @@ public abstract class SchedulingAlgorithm {
                     Thread.sleep(simulationUnit);
                 } catch (InterruptedException e) {
                 }
+            } else {
+                // if manual mode
+                System.out.print("Continue? Y/N");
+                String next = scan.nextLine();
+                if (next.contains("n") || next.contains("N")) {
+                    break;
+                }
             }
         }
+        System.out.println("Finished!");
+        scan.close();
     }
 
     //Selects the next task using the appropriate scheduling algorithm

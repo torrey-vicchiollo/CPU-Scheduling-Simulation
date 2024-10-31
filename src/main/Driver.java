@@ -33,7 +33,7 @@ public class Driver {
                 System.out.println("Please enter Quantum (time slice) >> ");
                 quantumTime = inputScanner.nextInt();
             }
-            inputScanner.close();
+            // inputScanner.close();
             //get input file
             scan = new Scanner(new File("src/proc.txt"));
             //find the input algorithm from the first line

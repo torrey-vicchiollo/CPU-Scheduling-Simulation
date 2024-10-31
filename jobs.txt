@@ -14,7 +14,7 @@ Visualize
 -I/O device
 -I/O queue
 Simulation
--Mode, 0 for auto 1 for manual
+-Mode, 0 for auto 1 for manual X
 -Unit time
 -Quantum, only used for round-robin-related
 Input File
