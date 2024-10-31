@@ -8,8 +8,8 @@ Performance Metrics
 -Turnaround time X
 -Waiting time X
 -Response time 
--AVG Turn time
--AVG wait time
+-AVG Turn time X
+-AVG wait time X
 Visualize
 -CPU
 -Ready queue
@@ -23,4 +23,12 @@ Input File
 PCB
 Scheduler
 Scheduling Simulation and Output
+
+shit we forogt about --------------
+- The users can select the scheduling algorithm to run (FCFS, RR, SJF, or PS). They
+can use the same scenario and run with each scheduling algorithm. Each time the user
+changes the algorithm, the program resets the state and statistics.
+- After each simulation, your program can ask the users to save the execution logs and
+system performance metrics for that run.
+-----------------------------------
 Extra Credits
