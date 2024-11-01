@@ -21,7 +21,7 @@ public class PCB {
     //current burst
     private int currentBurst;
     //the stats of the process execution
-    private int startTime, finishTime, turnaroundTime, waitingTime, quantumTimeTrack;
+    private int startTime, finishTime, turnaroundTime, responseTime, waitingTime, quantumTimeTrack;
     private final int quantumTime;
 
     //constructor
@@ -122,6 +122,11 @@ public class PCB {
 
     public void setStartTime(int startTime) {
         this.startTime = startTime;
+        this.responseTime = startTime - arrivalTime;
+    }
+
+    public int getResponseTime () {
+        return this.responseTime;
     }
 
     public int getFinishTime() {

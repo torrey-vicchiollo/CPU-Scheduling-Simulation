@@ -1,5 +1,8 @@
 package scheduling;
 
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -47,6 +50,10 @@ public abstract class SchedulingAlgorithm {
     }
 
     public void schedule(int quantumTime, Scanner inputScanner) {
+        double avgTAT = 0;
+        double avgWT = 0;
+        double avgRPT = 0;
+        double throughput = 0;
         //while there are processes and the ready queue is not empty
         while (!allProcs.isEmpty() || !readyQueue.isEmpty() || !waitingQueue.isEmpty()) {
             //clear terminal
@@ -175,17 +182,21 @@ public abstract class SchedulingAlgorithm {
             System.out.println("CPU utilization " + getCPUUtilization(systemTime, idleTime) + "%");
             int totalTAT = 0;
             int totalWT = 0;
+            int totalRPT = 0;
             for(PCB pcb: finishedProcs){
                 totalTAT += pcb.getTurnAroundTime();
                 totalWT += pcb.getWaitingTime();
+                totalRPT += pcb.getResponseTime();
             }
-            double avgTAT = (double) totalTAT / finishedProcs.size();
-            double avgWT = (double) totalWT / finishedProcs.size();
+            avgTAT = (double) totalTAT / finishedProcs.size();
+            avgWT = (double) totalWT / finishedProcs.size();
+            avgRPT = (double) totalRPT / finishedProcs.size();
 
             System.out.println("average turnaround time " + avgTAT);
             System.out.println("Average wait time " + avgWT);
+            System.out.println("Average response time: " + avgRPT);
             // Calculate throughput
-            double throughput = (double) finishedProcs.size() / systemTime;
+            throughput = (double) finishedProcs.size() / systemTime;
             // Print the throughput with two decimal places
             System.out.printf("Throughput: %.2f tasks per unit time\n", throughput);
 
@@ -207,8 +218,24 @@ public abstract class SchedulingAlgorithm {
                 }
             }
         }
+        System.out.print("Save data?Y/N");
+        String next = inputScanner.nextLine();
+        if (next.contains("y") || next.contains("Y")) {
+            System.out.print("Enter the path to save?");
+            String path = inputScanner.nextLine();
+            try {
+                BufferedWriter bw = new BufferedWriter(new FileWriter(path));
+                bw.write("Average TAT: " + avgTAT + "\n");
+                bw.write("Average WT: " + avgWT + "\n");
+                bw.write("Average RPT: " + avgRPT + "\n");
+                bw.write("Throughput: " + throughput + "\n");
+                bw.close();
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
         System.out.println("Finished!");
-        inputScanner.close();
     }
 
     //Selects the next task using the appropriate scheduling algorithm
