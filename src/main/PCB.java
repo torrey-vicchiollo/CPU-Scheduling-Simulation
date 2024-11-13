@@ -165,7 +165,7 @@ public class PCB {
 
     @Override
     public String toString() {
-        return "P" + id + " {Name=" + name + ", Arrival Time=" + arrivalTime + ", Current Burst=" + currentBurst + ", Priority=" + priority + ", Turnaround Time=" + turnaroundTime + ", Waiting Time=" + waitingTime + "}";
+        return "P" + id + " [NAME >> " + name + ", ARRIVAL TIME >> " + arrivalTime + ", CURRENT BURST >> " + currentBurst + ", PRIORITY >> " + priority + ", TURNAROUND TIME >> " + turnaroundTime + ", WAITING TIME >> " + waitingTime + "]";
     }
 
 }

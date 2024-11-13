@@ -93,7 +93,7 @@ public class Driver {
 
         while (true) {
             fileData fd = Driver.loadFile(simulationUnit, quantumTime);
-            System.out.print("Select algorithm (FCFS, SJF, PS, RR):");
+            System.out.print("Select algorithm (FCFS, SJF, PS, RR) >> ");
             fd.algorithm = inputScanner.nextLine();
             //create new scheduler
             SchedulingAlgorithm scheduler = null;
@@ -112,7 +112,7 @@ public class Driver {
                     scheduler = new RR(fd.allProcesses, simulationMode, simulationUnit);
                     break;
                 default:
-                    System.err.println("Unsupported algorithm!");
+                    System.err.println("UNSUPPORTED ALGORITHM");
             }
             //schedule
             if (scheduler != null) {

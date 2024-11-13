@@ -6,7 +6,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
-
 import main.CPU;
 import main.IODevice;
 import main.PCB;
@@ -175,11 +174,11 @@ public abstract class SchedulingAlgorithm {
             for (PCB proc : finishedProcs) {
                 System.out.println(proc.toString());
             }
-            System.out.println("system time: " + systemTime);
-            System.out.println("idle time: " + idleTime);
+            System.out.println("SYSTEM TIME >> " + systemTime);
+            System.out.println("IDLE TIME >> " + idleTime);
 
             //getting the cpu utilization
-            System.out.println("CPU utilization " + getCPUUtilization(systemTime, idleTime) + "%");
+            System.out.println("CPU UTILIZATION >> " + getCPUUtilization(systemTime, idleTime) + "%");
             int totalTAT = 0;
             int totalWT = 0;
             int totalRPT = 0;
@@ -192,13 +191,13 @@ public abstract class SchedulingAlgorithm {
             avgWT = (double) totalWT / finishedProcs.size();
             avgRPT = (double) totalRPT / finishedProcs.size();
 
-            System.out.println("average turnaround time " + avgTAT);
-            System.out.println("Average wait time " + avgWT);
-            System.out.println("Average response time: " + avgRPT);
+            System.out.println("AVG. TURNAROUND >> " + avgTAT);
+            System.out.println("AVG. WAIT >> " + avgWT);
+            System.out.println("AVG. RESPONSE >> " + avgRPT);
             // Calculate throughput
             throughput = (double) finishedProcs.size() / systemTime;
             // Print the throughput with two decimal places
-            System.out.printf("Throughput: %.2f tasks per unit time\n", throughput);
+            System.out.printf("THROUGHPUT >> %.2f TASKS/UNIT TIME\n", throughput);
 
 
             System.out.println("\n\n\n");
@@ -211,31 +210,31 @@ public abstract class SchedulingAlgorithm {
                 }
             } else {
                 // if manual mode
-                System.out.print("Continue? Y/N");
+                System.out.print("CONTINUE? >> Y/N");
                 String next = inputScanner.nextLine();
                 if (next.contains("n") || next.contains("N")) {
                     break;
                 }
             }
         }
-        System.out.print("Save data?Y/N");
+        System.out.print("SAVE DATA? >> Y/N");
         String next = inputScanner.nextLine();
         if (next.contains("y") || next.contains("Y")) {
-            System.out.print("Enter the path to save?");
+            System.out.print("ENTER PATH >>");
             String path = inputScanner.nextLine();
             try {
                 BufferedWriter bw = new BufferedWriter(new FileWriter(path));
-                bw.write("Average TAT: " + avgTAT + "\n");
-                bw.write("Average WT: " + avgWT + "\n");
-                bw.write("Average RPT: " + avgRPT + "\n");
-                bw.write("Throughput: " + throughput + "\n");
+                bw.write("AVG. TAT >> " + avgTAT + "\n");
+                bw.write("AVG. WT  >> " + avgWT + "\n");
+                bw.write("AVG. RPT >> " + avgRPT + "\n");
+                bw.write("THROUGHPUT >> " + throughput + "\n");
                 bw.close();
 
             } catch (IOException e) {
                 e.printStackTrace();
             }
         }
-        System.out.println("Finished!");
+        System.out.println("FINISHED");
     }
 
     //Selects the next task using the appropriate scheduling algorithm
@@ -243,7 +242,6 @@ public abstract class SchedulingAlgorithm {
 
     //print simulation step
     public void print() {
-        System.out.println("idle time:  " + idleTime);
         System.out.println("-CPU--  -READY-QUEUE-----------------");
         System.out.printf("| %s |<<  ", curCPUProcess == null ? "ID" : "P" + curCPUProcess.getId());
         for (PCB proc : readyQueue) {
@@ -274,6 +272,4 @@ public abstract class SchedulingAlgorithm {
         double utilization = ((systemTime - idleTime) / (double) systemTime) * 100;
         return Math.round(utilization * 100.0) / 100.0;
     }
-
-
 }
